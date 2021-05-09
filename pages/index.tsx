@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = process.env.serverUrl || 'http://localhost:5000';
 const SOCKET_EVENT_MSG = 'AVAIL_DETAIL';
 
 export default function Home() {
