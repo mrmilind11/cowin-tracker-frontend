@@ -1,7 +1,6 @@
 import { Table, TableCell, TableContainer, TableHead, TableRow, Paper, TableBody, TablePagination, Button, Chip, CardContent, Card, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react"
 import { IVaccineCentre } from "../model/vaccine-centre.interface";
-import Image from 'next/image';
 
 interface IVaccineCentreTableProps {
     centreList: IVaccineCentre[];
@@ -102,7 +101,7 @@ const VaccineCentreTable: React.FC<IVaccineCentreTableProps> = ({ centreList }) 
             {
                 centreList.length === 0 ?
                     <Paper elevation={3} className={`${styles.emptyBox} ${styles.flexCenter}`}>
-                        <Image src="/covid-data.svg" alt="empty" width="300" height="300" />
+                        <img src="/covid-data.svg" alt="empty" width="300" height="300" />
                         <Typography variant="h6" color="textPrimary">No Vaccine Found</Typography>
                         <Typography variant="subtitle1">Keep Patience. We'll update as soon as vaccine are available</Typography>
                     </Paper>
