@@ -28,11 +28,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const SOCKET_URL = process.env.serverUrl || 'http://localhost:5000';
-const SOCKET_EVENT_MSG = 'AVAIL_DETAIL';
-
-export default function Home() {
-  const socketRef = io(SOCKET_URL);
+interface HomeProps {
+  socketUrl: string;
+  socketMsg: string;
+}
+export default function Home(props: HomeProps) {
+  const socketRef = io(props.socketUrl);
   const styles = useStyles();
 
   const [centreList, setCentreList] = useState<IVaccineCentre[]>([]);
@@ -42,7 +43,7 @@ export default function Home() {
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
   const listenSocketEvent = () => {
-    socketRef.on(SOCKET_EVENT_MSG, (data: IVaccineCentre[]) => {
+    socketRef.on(props.socketMsg, (data: IVaccineCentre[]) => {
       setCentreList(data);
       setUpdateAvailable(true);
     })
@@ -102,6 +103,14 @@ export default function Home() {
   )
 }
 
+export async function getStaticProps() {
+  return {
+    props: {
+      socketUrl: process.env.SOCKET_URL || 'https://localhost:5000',
+      socketMSg: process.env.SOCKET_MSG || 'AVAIL_DETAIL'
+    }
+  }
+}
 
 const sampleData: any = [
   {
