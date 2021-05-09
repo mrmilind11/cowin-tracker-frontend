@@ -1,1 +1,840 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Cowin Vaccine Tracker</title><meta name="description" content="Track Vaccine Availability"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><meta name="next-head-count" content="7"/><link rel="preload" href="/_next/static/css/af9fd20bda9ac17bc358.css" as="style"/><link rel="stylesheet" href="/_next/static/css/af9fd20bda9ac17bc358.css" data-n-g=""/><noscript data-n-css=""></noscript><link rel="preload" href="/_next/static/chunks/webpack-1ec4ecf97c58fdc2c288.js" as="script"/><link rel="preload" href="/_next/static/chunks/framework-c44c07160de1f332b2aa.js" as="script"/><link rel="preload" href="/_next/static/chunks/597-9a2cfdb06ca19bc9fffc.js" as="script"/><link rel="preload" href="/_next/static/chunks/778-f94530a7e45e7ae7f427.js" as="script"/><link rel="preload" href="/_next/static/chunks/main-9ca82ec4d4aca520c43d.js" as="script"/><link rel="preload" href="/_next/static/chunks/pages/_app-66e49c48b4430cbaf473.js" as="script"/><link rel="preload" href="/_next/static/chunks/433-15d1a450117b6190c26d.js" as="script"/><link rel="preload" href="/_next/static/chunks/pages/index-0b9a10dea53adbcda990.js" as="script"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/></head><body><div id="__next"><header class="MuiPaper-root MuiAppBar-root MuiAppBar-positionRelative MuiAppBar-colorPrimary jss2 MuiPaper-elevation4"><div class="MuiToolbar-root MuiToolbar-regular jss3 MuiToolbar-gutters"><h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorInherit">Vaccine Availability Tracker</h6><div><button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary Mui-disabled Mui-disabled" tabindex="-1" type="button" disabled=""><span class="MuiButton-label">Auto Refresh</span></button><span class="MuiSwitch-root"><span class="MuiButtonBase-root MuiIconButton-root jss4 MuiSwitch-switchBase MuiSwitch-colorSecondary jss5 Mui-checked" aria-disabled="false"><span class="MuiIconButton-label"><input type="checkbox" checked="" class="jss7 MuiSwitch-input"/><span class="MuiSwitch-thumb"></span></span></span><span class="MuiSwitch-track"></span></span></div></div></header><main class="basic-vertical"><div class="basic-vertical jss1"><div class="jss8 jss9"><div class="MuiPaper-root jss10 jss8 MuiPaper-elevation3 MuiPaper-rounded"><img src="/covid-data.svg" alt="empty" width="300" height="300"/><h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary">No Vaccine Found</h6><h6 class="MuiTypography-root MuiTypography-subtitle1">Keep Patience. We&#x27;ll update as soon as vaccine are available</h6></div></div></div></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"an0xYEk8dgxti2O8EbRUC","nextExport":true,"autoExport":true,"isFallback":false}</script><script nomodule="" src="/_next/static/chunks/polyfills-8683bd742a84c1edd48c.js"></script><script src="/_next/static/chunks/webpack-1ec4ecf97c58fdc2c288.js" async=""></script><script src="/_next/static/chunks/framework-c44c07160de1f332b2aa.js" async=""></script><script src="/_next/static/chunks/597-9a2cfdb06ca19bc9fffc.js" async=""></script><script src="/_next/static/chunks/778-f94530a7e45e7ae7f427.js" async=""></script><script src="/_next/static/chunks/main-9ca82ec4d4aca520c43d.js" async=""></script><script src="/_next/static/chunks/pages/_app-66e49c48b4430cbaf473.js" async=""></script><script src="/_next/static/chunks/433-15d1a450117b6190c26d.js" async=""></script><script src="/_next/static/chunks/pages/index-0b9a10dea53adbcda990.js" async=""></script><script src="/_next/static/an0xYEk8dgxti2O8EbRUC/_buildManifest.js" async=""></script><script src="/_next/static/an0xYEk8dgxti2O8EbRUC/_ssgManifest.js" async=""></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta name="theme-color" content="#3f50b5"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700&amp;display=swap"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,700&amp;display=swap"/><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Cowin Vaccine Tracker</title><meta name="description" content="Track Vaccine Availability"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><meta name="next-head-count" content="7"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/css/af9fd20bda9ac17bc358.css" as="style"/><link rel="stylesheet" href="/cowin-tracker-frontend/_next/static/css/af9fd20bda9ac17bc358.css" data-n-g=""/><noscript data-n-css=""></noscript><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/webpack-4384a9abea883699411b.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/framework-c44c07160de1f332b2aa.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/597-9a2cfdb06ca19bc9fffc.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/778-f94530a7e45e7ae7f427.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/main-9ca82ec4d4aca520c43d.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/pages/_app-66e49c48b4430cbaf473.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/350-e98f57d452fbcb2673fc.js" as="script"/><link rel="preload" href="/cowin-tracker-frontend/_next/static/chunks/pages/index-50daf08b31a6c4006468.js" as="script"/><style id="jss-server-side">.MuiPaper-root {
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #fff;
+}
+.MuiPaper-rounded {
+  border-radius: 4px;
+}
+.MuiPaper-outlined {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.MuiPaper-elevation0 {
+  box-shadow: none;
+}
+.MuiPaper-elevation1 {
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation2 {
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation3 {
+  box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation4 {
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation5 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation6 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation7 {
+  box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation8 {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation9 {
+  box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation10 {
+  box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation11 {
+  box-shadow: 0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation12 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation13 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation14 {
+  box-shadow: 0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation15 {
+  box-shadow: 0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation16 {
+  box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation17 {
+  box-shadow: 0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation18 {
+  box-shadow: 0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation19 {
+  box-shadow: 0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation20 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation21 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation22 {
+  box-shadow: 0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation23 {
+  box-shadow: 0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12);
+}
+.MuiPaper-elevation24 {
+  box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
+}
+.MuiButtonBase-root {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.MuiButtonBase-root::-moz-focus-inner {
+  border-style: none;
+}
+.MuiButtonBase-root.Mui-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+@media print {
+  .MuiButtonBase-root {
+    color-adjust: exact;
+  }
+}
+  .MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+  }
+  .MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+@media (hover: none) {
+  .MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-edgeStart {
+    margin-left: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+  }
+  .MuiIconButton-edgeEnd {
+    margin-right: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+  }
+  .MuiIconButton-colorInherit {
+    color: inherit;
+  }
+  .MuiIconButton-colorPrimary {
+    color: #3f50b5;
+  }
+  .MuiIconButton-colorPrimary:hover {
+    background-color: rgba(63, 80, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-colorSecondary {
+    color: #f44336;
+  }
+  .MuiIconButton-colorSecondary:hover {
+    background-color: rgba(244, 67, 54, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+  }
+  .MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .MuiAppBar-root {
+    width: 100%;
+    display: flex;
+    z-index: 1100;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+  .MuiAppBar-positionFixed {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: fixed;
+  }
+@media print {
+  .MuiAppBar-positionFixed {
+    position: absolute;
+  }
+}
+  .MuiAppBar-positionAbsolute {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: absolute;
+  }
+  .MuiAppBar-positionSticky {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: sticky;
+  }
+  .MuiAppBar-positionStatic {
+    position: static;
+  }
+  .MuiAppBar-positionRelative {
+    position: relative;
+  }
+  .MuiAppBar-colorDefault {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #f5f5f5;
+  }
+  .MuiAppBar-colorPrimary {
+    color: #fff;
+    background-color: #3f50b5;
+  }
+  .MuiAppBar-colorSecondary {
+    color: #000;
+    background-color: #f44336;
+  }
+  .MuiAppBar-colorInherit {
+    color: inherit;
+  }
+  .MuiAppBar-colorTransparent {
+    color: inherit;
+    background-color: transparent;
+  }
+  .MuiTypography-root {
+    margin: 0;
+  }
+  .MuiTypography-body2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+  }
+  .MuiTypography-body1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+  }
+  .MuiTypography-caption {
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+  }
+  .MuiTypography-button {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+  }
+  .MuiTypography-h1 {
+    font-size: 6rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    line-height: 1.167;
+    letter-spacing: -0.01562em;
+  }
+  .MuiTypography-h2 {
+    font-size: 3.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.00833em;
+  }
+  .MuiTypography-h3 {
+    font-size: 3rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.167;
+    letter-spacing: 0em;
+  }
+  .MuiTypography-h4 {
+    font-size: 2.125rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+  }
+  .MuiTypography-h5 {
+    font-size: 1.5rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.334;
+    letter-spacing: 0em;
+  }
+  .MuiTypography-h6 {
+    font-size: 1.25rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+  }
+  .MuiTypography-subtitle1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.00938em;
+  }
+  .MuiTypography-subtitle2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.57;
+    letter-spacing: 0.00714em;
+  }
+  .MuiTypography-overline {
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 2.66;
+    letter-spacing: 0.08333em;
+    text-transform: uppercase;
+  }
+  .MuiTypography-srOnly {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .MuiTypography-alignLeft {
+    text-align: left;
+  }
+  .MuiTypography-alignCenter {
+    text-align: center;
+  }
+  .MuiTypography-alignRight {
+    text-align: right;
+  }
+  .MuiTypography-alignJustify {
+    text-align: justify;
+  }
+  .MuiTypography-noWrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .MuiTypography-gutterBottom {
+    margin-bottom: 0.35em;
+  }
+  .MuiTypography-paragraph {
+    margin-bottom: 16px;
+  }
+  .MuiTypography-colorInherit {
+    color: inherit;
+  }
+  .MuiTypography-colorPrimary {
+    color: #3f50b5;
+  }
+  .MuiTypography-colorSecondary {
+    color: #f44336;
+  }
+  .MuiTypography-colorTextPrimary {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .MuiTypography-colorTextSecondary {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .MuiTypography-colorError {
+    color: #f44336;
+  }
+  .MuiTypography-displayInline {
+    display: inline;
+  }
+  .MuiTypography-displayBlock {
+    display: block;
+  }
+  .MuiButton-root {
+    color: rgba(0, 0, 0, 0.87);
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+  }
+  .MuiButton-root:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+@media (hover: none) {
+  .MuiButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-root:hover.Mui-disabled {
+    background-color: transparent;
+  }
+  .MuiButton-label {
+    width: 100%;
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .MuiButton-text {
+    padding: 6px 8px;
+  }
+  .MuiButton-textPrimary {
+    color: #3f50b5;
+  }
+  .MuiButton-textPrimary:hover {
+    background-color: rgba(63, 80, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-textPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-textSecondary {
+    color: #f44336;
+  }
+  .MuiButton-textSecondary:hover {
+    background-color: rgba(244, 67, 54, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-textSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-outlined {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    padding: 5px 15px;
+  }
+  .MuiButton-outlined.Mui-disabled {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiButton-outlinedPrimary {
+    color: #3f50b5;
+    border: 1px solid rgba(63, 80, 181, 0.5);
+  }
+  .MuiButton-outlinedPrimary:hover {
+    border: 1px solid #3f50b5;
+    background-color: rgba(63, 80, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-outlinedPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-outlinedSecondary {
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.5);
+  }
+  .MuiButton-outlinedSecondary:hover {
+    border: 1px solid #f44336;
+    background-color: rgba(244, 67, 54, 0.04);
+  }
+  .MuiButton-outlinedSecondary.Mui-disabled {
+    border: 1px solid rgba(0, 0, 0, 0.26);
+  }
+@media (hover: none) {
+  .MuiButton-outlinedSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-contained {
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+  .MuiButton-contained:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+    background-color: #d5d5d5;
+  }
+  .MuiButton-contained.Mui-focusVisible {
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+  }
+  .MuiButton-contained:active {
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+  }
+  .MuiButton-contained.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+@media (hover: none) {
+  .MuiButton-contained:hover {
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+}
+  .MuiButton-contained:hover.Mui-disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  .MuiButton-containedPrimary {
+    color: #fff;
+    background-color: #3f50b5;
+  }
+  .MuiButton-containedPrimary:hover {
+    background-color: #002884;
+  }
+@media (hover: none) {
+  .MuiButton-containedPrimary:hover {
+    background-color: #3f50b5;
+  }
+}
+  .MuiButton-containedSecondary {
+    color: #000;
+    background-color: #f44336;
+  }
+  .MuiButton-containedSecondary:hover {
+    background-color: #ba000d;
+  }
+@media (hover: none) {
+  .MuiButton-containedSecondary:hover {
+    background-color: #f44336;
+  }
+}
+  .MuiButton-disableElevation {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation:hover {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation.Mui-focusVisible {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation:active {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation.Mui-disabled {
+    box-shadow: none;
+  }
+  .MuiButton-colorInherit {
+    color: inherit;
+    border-color: currentColor;
+  }
+  .MuiButton-textSizeSmall {
+    padding: 4px 5px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-textSizeLarge {
+    padding: 8px 11px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-outlinedSizeSmall {
+    padding: 3px 9px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-outlinedSizeLarge {
+    padding: 7px 21px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-containedSizeSmall {
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-containedSizeLarge {
+    padding: 8px 22px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-fullWidth {
+    width: 100%;
+  }
+  .MuiButton-startIcon {
+    display: inherit;
+    margin-left: -4px;
+    margin-right: 8px;
+  }
+  .MuiButton-startIcon.MuiButton-iconSizeSmall {
+    margin-left: -2px;
+  }
+  .MuiButton-endIcon {
+    display: inherit;
+    margin-left: 8px;
+    margin-right: -4px;
+  }
+  .MuiButton-endIcon.MuiButton-iconSizeSmall {
+    margin-right: -2px;
+  }
+  .MuiButton-iconSizeSmall > *:first-child {
+    font-size: 18px;
+  }
+  .MuiButton-iconSizeMedium > *:first-child {
+    font-size: 20px;
+  }
+  .MuiButton-iconSizeLarge > *:first-child {
+    font-size: 22px;
+  }
+  .jss4 {
+    padding: 9px;
+  }
+  .jss7 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    cursor: inherit;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    z-index: 1;
+    position: absolute;
+  }
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+strong, b {
+  font-weight: 700;
+}
+body {
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  background-color: #fafafa;
+}
+@media print {
+  body {
+    background-color: #fff;
+  }
+}
+body::backdrop {
+  background-color: #fafafa;
+}
+  .MuiSwitch-root {
+    width: 58px;
+    height: 38px;
+    display: inline-flex;
+    padding: 12px;
+    z-index: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+@media print {
+  .MuiSwitch-root {
+    color-adjust: exact;
+  }
+}
+  .MuiSwitch-edgeStart {
+    margin-left: -8px;
+  }
+  .MuiSwitch-edgeEnd {
+    margin-right: -8px;
+  }
+  .MuiSwitch-switchBase {
+    top: 0;
+    left: 0;
+    color: #fafafa;
+    z-index: 1;
+    position: absolute;
+    transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  .MuiSwitch-switchBase.Mui-checked {
+    transform: translateX(20px);
+  }
+  .MuiSwitch-switchBase.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    opacity: 0.5;
+  }
+  .MuiSwitch-switchBase.Mui-disabled + .MuiSwitch-track {
+    opacity: 0.12;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked {
+    color: #3f50b5;
+  }
+  .MuiSwitch-colorPrimary.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track {
+    background-color: #3f50b5;
+  }
+  .MuiSwitch-colorPrimary.Mui-disabled + .MuiSwitch-track {
+    background-color: #000;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked:hover {
+    background-color: rgba(63, 80, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiSwitch-colorPrimary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiSwitch-colorSecondary.Mui-checked {
+    color: #f44336;
+  }
+  .MuiSwitch-colorSecondary.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    background-color: #f44336;
+  }
+  .MuiSwitch-colorSecondary.Mui-disabled + .MuiSwitch-track {
+    background-color: #000;
+  }
+  .MuiSwitch-colorSecondary.Mui-checked:hover {
+    background-color: rgba(244, 67, 54, 0.04);
+  }
+@media (hover: none) {
+  .MuiSwitch-colorSecondary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiSwitch-sizeSmall {
+    width: 40px;
+    height: 24px;
+    padding: 7px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-switchBase {
+    padding: 4px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-switchBase.Mui-checked {
+    transform: translateX(16px);
+  }
+  .MuiSwitch-input {
+    left: -100%;
+    width: 300%;
+  }
+  .MuiSwitch-thumb {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+  .MuiSwitch-track {
+    width: 100%;
+    height: 100%;
+    opacity: 0.38;
+    z-index: -1;
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 7px;
+    background-color: #000;
+  }
+  .MuiToolbar-root {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+  .MuiToolbar-gutters {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+@media (min-width:600px) {
+  .MuiToolbar-gutters {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+  .MuiToolbar-regular {
+    min-height: 56px;
+  }
+@media (min-width:0px) and (orientation: landscape) {
+  .MuiToolbar-regular {
+    min-height: 48px;
+  }
+}
+@media (min-width:600px) {
+  .MuiToolbar-regular {
+    min-height: 64px;
+  }
+}
+  .MuiToolbar-dense {
+    min-height: 48px;
+  }
+  .jss8 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .jss9 {
+    padding: 16px;
+  }
+  .jss10 {
+    width: 50%;
+    padding: 32px;
+    min-width: 300px;
+  }
+  .jss1 {
+    width: 100%;
+    margin: 32px auto;
+    max-width: 70%;
+  }
+@media (max-width:959.95px) {
+  .jss1 {
+    margin: 16px;
+    max-width: 100%;
+  }
+}
+  .jss2 {
+    display: flex;
+    flex-direction: row;
+  }
+  .jss3 {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }</style><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700&display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,700&display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/></head><body><div id="__next"><header class="MuiPaper-root MuiAppBar-root MuiAppBar-positionRelative MuiAppBar-colorPrimary jss2 MuiPaper-elevation4"><div class="MuiToolbar-root MuiToolbar-regular jss3 MuiToolbar-gutters"><h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorInherit">Vaccine Availability Tracker</h6><div><button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary Mui-disabled Mui-disabled" tabindex="-1" type="button" disabled=""><span class="MuiButton-label">Auto Refresh</span></button><span class="MuiSwitch-root"><span class="MuiButtonBase-root MuiIconButton-root jss4 MuiSwitch-switchBase MuiSwitch-colorSecondary jss5 Mui-checked" aria-disabled="false"><span class="MuiIconButton-label"><input type="checkbox" checked="" class="jss7 MuiSwitch-input"/><span class="MuiSwitch-thumb"></span></span></span><span class="MuiSwitch-track"></span></span></div></div></header><main class="basic-vertical"><div class="basic-vertical jss1"><div class="jss8 jss9"><div class="MuiPaper-root jss10 jss8 MuiPaper-elevation3 MuiPaper-rounded"><img src="/covid-data.svg" alt="empty" width="300" height="300"/><h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary">No Vaccine Found</h6><h6 class="MuiTypography-root MuiTypography-subtitle1">Keep Patience. We&#x27;ll update as soon as vaccine are available</h6></div></div></div></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"_DOH8xziFhqhc4ZALC8Ha","assetPrefix":"/cowin-tracker-frontend","nextExport":true,"autoExport":true,"isFallback":false}</script><script nomodule="" src="/cowin-tracker-frontend/_next/static/chunks/polyfills-8683bd742a84c1edd48c.js"></script><script src="/cowin-tracker-frontend/_next/static/chunks/webpack-4384a9abea883699411b.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/framework-c44c07160de1f332b2aa.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/597-9a2cfdb06ca19bc9fffc.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/778-f94530a7e45e7ae7f427.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/main-9ca82ec4d4aca520c43d.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/pages/_app-66e49c48b4430cbaf473.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/350-e98f57d452fbcb2673fc.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/chunks/pages/index-50daf08b31a6c4006468.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/_DOH8xziFhqhc4ZALC8Ha/_buildManifest.js" async=""></script><script src="/cowin-tracker-frontend/_next/static/_DOH8xziFhqhc4ZALC8Ha/_ssgManifest.js" async=""></script></body></html>
