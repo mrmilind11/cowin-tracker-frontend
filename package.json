@@ -1,4 +1,5 @@
 {
+  "homepage": "https://mrmilind11.github.io/cowin-tracker-frontend",
   "name": "cowin-tracker",
   "version": "0.1.0",
   "private": true,
@@ -7,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
-    "build-start": "next build && next start"
+    "build-start": "next build && next start",
+    "predeploy": "npm run export",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -21,6 +24,7 @@
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/socket.io-client": "^1.4.36",
+    "gh-pages": "^3.1.0",
     "typescript": "^4.2.4"
   }
 }

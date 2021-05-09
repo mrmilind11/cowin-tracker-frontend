@@ -1,9 +1,10 @@
-import { AppBar, Button, CssBaseline, makeStyles, Switch, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Button, CssBaseline, makeStyles, Switch, ThemeProvider, Toolbar, Typography } from '@material-ui/core'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import VaccineCentreTable from '../components/vaccine-centre-table'
 import { IVaccineCentre } from '../model/vaccine-centre.interface'
+import { lightTheme } from '../src/theme/theme'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,6 +48,13 @@ export default function Home() {
     })
   }
 
+  const removeSSRMaterial = () => {
+    const jssStyles = document.querySelector('#jss-server-side')
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles)
+    }
+  }
+
   useEffect(() => {
     if (centreList && (updateAvailable === false || autoRefresh === true)) {
       setAvailableCentreList(centreList);
@@ -56,6 +64,7 @@ export default function Home() {
   useEffect(() => {
     socketRef.connect();
     listenSocketEvent();
+    removeSSRMaterial();
     return () => {
       socketRef.disconnect();
     }
@@ -70,24 +79,25 @@ export default function Home() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
-
-      <CssBaseline />
-      <AppBar position="relative" className={styles.appBar}>
-        <Toolbar className={styles.toolbar}>
-          <Typography variant="h6" color="inherit">Vaccine Availability Tracker</Typography>
-          <div>
-            <Button variant="contained" color="secondary" disabled={autoRefresh || !updateAvailable} onClick={() => setUpdateAvailable(false)}>
-              {autoRefresh ? 'Auto Refresh' : 'Refresh'}
-            </Button>
-            <Switch color="secondary" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} />
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <AppBar position="relative" className={styles.appBar}>
+          <Toolbar className={styles.toolbar}>
+            <Typography variant="h6" color="inherit">Vaccine Availability Tracker</Typography>
+            <div>
+              <Button variant="contained" color="secondary" disabled={autoRefresh || !updateAvailable} onClick={() => setUpdateAvailable(false)}>
+                {autoRefresh ? 'Auto Refresh' : 'Refresh'}
+              </Button>
+              <Switch color="secondary" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} />
+            </div>
+          </Toolbar>
+        </AppBar>
+        <main className="basic-vertical">
+          <div className={`basic-vertical ${styles.container}`}>
+            <VaccineCentreTable centreList={availableCentreList}></VaccineCentreTable>
           </div>
-        </Toolbar>
-      </AppBar>
-      <main className="basic-vertical">
-        <div className={`basic-vertical ${styles.container}`}>
-          <VaccineCentreTable centreList={availableCentreList}></VaccineCentreTable>
-        </div>
-      </main>
+        </main>
+      </ThemeProvider>
     </>
   )
 }
