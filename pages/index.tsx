@@ -1,6 +1,6 @@
 import { AppBar, Button, CssBaseline, makeStyles, Switch, ThemeProvider, Toolbar, Typography } from '@material-ui/core'
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import io from 'socket.io-client'
 import VaccineCentreTable from '../components/vaccine-centre-table'
 import { IVaccineCentre } from '../model/vaccine-centre.interface'
@@ -33,7 +33,7 @@ interface HomeProps {
   socketMsg: string;
 }
 export default function Home(props: HomeProps) {
-  const socketRef = io(props.socketUrl);
+  const socketRef = useMemo(() => io(props.socketUrl), []);
   const styles = useStyles();
 
   const [centreList, setCentreList] = useState<IVaccineCentre[]>([]);
@@ -43,9 +43,15 @@ export default function Home(props: HomeProps) {
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
   const listenSocketEvent = () => {
+    console.log('socket msg check', props.socketMsg);
+    console.log('socket msg local', props.socketUrl);
     socketRef.on(props.socketMsg, (data: IVaccineCentre[]) => {
+      console.log('Socket msg', data);
       setCentreList(data);
       setUpdateAvailable(true);
+    })
+    socketRef.on('CONNECTED', (data) => {
+      console.log('Connected', data);
     })
   }
 
@@ -63,7 +69,7 @@ export default function Home(props: HomeProps) {
   }, [centreList, updateAvailable, autoRefresh])
 
   useEffect(() => {
-    socketRef.connect();
+    // socketRef.connect();
     listenSocketEvent();
     removeSSRMaterial();
     return () => {
@@ -107,7 +113,7 @@ export async function getStaticProps() {
   return {
     props: {
       socketUrl: process.env.SOCKET_URL || 'https://localhost:5000',
-      socketMSg: process.env.SOCKET_MSG || 'AVAIL_DETAIL'
+      socketMsg: process.env.SOCKET_MSG || 'AVAIL_DETAIL'
     }
   }
 }
