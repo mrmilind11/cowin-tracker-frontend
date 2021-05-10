@@ -19,7 +19,7 @@ interface ITableRow {
 
 const ROW_PER_PAGE = 10;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     flexCenter: {
         display: 'flex',
         flexDirection: 'column',
@@ -32,7 +32,10 @@ const useStyles = makeStyles(() => ({
     emptyBox: {
         padding: 32,
         minWidth: 300,
-        width: '50%'
+        width: '50%',
+        [theme.breakpoints.down('sm')]: {
+            width: '95%'
+        }
     }
 }))
 

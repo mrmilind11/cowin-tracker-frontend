@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '70%',
     [theme.breakpoints.down('sm')]: {
       maxWidth: '100%',
-      margin: '16px'
     }
   },
   appBar: {
