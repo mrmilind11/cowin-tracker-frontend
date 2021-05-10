@@ -32,8 +32,11 @@ interface HomeProps {
   socketUrl: string;
   socketMsg: string;
 }
+const connectionOptions = {
+  transports: ['websocket', 'polling', 'flashsocket']
+};
 export default function Home(props: HomeProps) {
-  const socketRef = useMemo(() => io(props.socketUrl), []);
+  const socketRef = useMemo(() => io(props.socketUrl, connectionOptions), []);
   const styles = useStyles();
 
   const [centreList, setCentreList] = useState<IVaccineCentre[]>([]);
