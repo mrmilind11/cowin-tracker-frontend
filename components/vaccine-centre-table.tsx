@@ -114,97 +114,99 @@ const VaccineCentreTable: React.FC<IVaccineCentreTableProps> = ({ centreList }) 
     return (
         <div className={`${styles.flexCenter} ${styles.pad16}`}>
             {
-                centreList.length === 0 ?
-                    <Paper elevation={3} className={`${styles.emptyBox} ${styles.flexCenter}`}>
-                        <img src="/covid-data.svg" alt="empty" width="300" height="300" />
-                        <Typography variant="h6" color="textPrimary">No Vaccine Found</Typography>
-                        <Typography variant="subtitle1">Keep Patience. We'll update as soon as vaccine are available</Typography>
-                    </Paper>
-                    :
-                    <>
-                        <div className={styles.filterBox}>
-                            <Select
-                                multiple
-                                className={styles.mr16}
-                                value={selectedRegion}
-                                input={<Input />}
-                                disabled={true}
-                            >
-                                {regionList.map((region, index) => (
-                                    <MenuItem key={index} value={region.value}>
-                                        {region.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
+                <>
+                    <div className={styles.filterBox}>
+                        <Select
+                            multiple
+                            className={styles.mr16}
+                            value={selectedRegion}
+                            input={<Input />}
+                            disabled={true}
+                        >
+                            {regionList.map((region, index) => (
+                                <MenuItem key={index} value={region.value}>
+                                    {region.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
 
-                            <Select
-                                value={selectedAge}
-                                className={styles.mr16}
-                                input={<Input />}
-                                onChange={(e: React.ChangeEvent<{ name: string; value: number }>) => setSelectedAge(e.target.value)}
-                            >
-                                {ageLimitList.map((age, index) => (
-                                    <MenuItem key={index} value={age.value}>
-                                        {age.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </div>
-                        <TableContainer component={Paper}>
-                            <Table aria-label="Available Vaccine Table">
-                                <TableHead>
-                                    <TableRow>
+                        <Select
+                            value={selectedAge}
+                            className={styles.mr16}
+                            input={<Input />}
+                            onChange={(e: React.ChangeEvent<{ name: string; value: number }>) => setSelectedAge(e.target.value)}
+                        >
+                            {ageLimitList.map((age, index) => (
+                                <MenuItem key={index} value={age.value}>
+                                    {age.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </div>
+                    {
+                        tableRows.length === 0 ?
+                            <Paper elevation={3} className={`${styles.emptyBox} ${styles.flexCenter}`}>
+                                <img src="/covid-data.svg" alt="empty" width="300" height="300" />
+                                <Typography variant="h6" color="textPrimary">No Vaccine Found</Typography>
+                                <Typography variant="subtitle1">Keep Patience. We'll update as soon as vaccine are available</Typography>
+                            </Paper>
+                            :
+                            <TableContainer component={Paper}>
+                                <Table aria-label="Available Vaccine Table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {
+                                                headerList.map((value, index) => <TableCell key={index} style={{ width: headerMap[value]?.width, minWidth: 100 }}>
+                                                    {headerMap[value]?.displayName}
+                                                </TableCell>)
+                                            }
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                         {
-                                            headerList.map((value, index) => <TableCell key={index} style={{ width: headerMap[value]?.width, minWidth: 100 }}>
-                                                {headerMap[value]?.displayName}
-                                            </TableCell>)
+                                            rowsToRender.map((value, rowIndex) => (
+                                                <TableRow key={rowIndex}>
+                                                    {
+                                                        headerList.map((col, index) => <TableCell key={index} style={{ width: headerMap[col]?.width, minWidth: 100 }}>
+                                                            {
+                                                                col === 'available_capacity' &&
+                                                                <Chip label={value[col]} style={{ backgroundColor: value[col] > 10 ? '#a9d18e' : '#ffbf00' }} />
+                                                            }
+                                                            {
+                                                                col === 'fee_type' && <>
+                                                                    {
+                                                                        value[col].toUpperCase() === 'FREE' ? value[col] :
+                                                                            <Chip style={{ backgroundColor: '#e96565', color: '#ffffff' }} label={value[col]} />
+                                                                    }
+                                                                </>
+                                                            }
+                                                            {['fee_type', 'available_capacity'].indexOf(col) === -1 &&
+                                                                <>
+                                                                    {
+                                                                        headerMap[col].type === 'chip' ?
+                                                                            <Chip label={value[col]} /> :
+                                                                            value[col]
+                                                                    }
+                                                                </>
+                                                            }
+                                                        </TableCell>)
+                                                    }
+                                                </TableRow>
+                                            ))
                                         }
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {
-                                        rowsToRender.map((value, rowIndex) => (
-                                            <TableRow key={rowIndex}>
-                                                {
-                                                    headerList.map((col, index) => <TableCell key={index} style={{ width: headerMap[col]?.width, minWidth: 100 }}>
-                                                        {
-                                                            col === 'available_capacity' &&
-                                                            <Chip label={value[col]} style={{ backgroundColor: value[col] > 10 ? '#a9d18e' : '#ffbf00' }} />
-                                                        }
-                                                        {
-                                                            col === 'fee_type' && <>
-                                                                {
-                                                                    value[col].toUpperCase() === 'FREE' ? value[col] :
-                                                                        <Chip style={{ backgroundColor: '#e96565', color: '#ffffff' }} label={value[col]} />
-                                                                }
-                                                            </>
-                                                        }
-                                                        {['fee_type', 'available_capacity'].indexOf(col) === -1 &&
-                                                            <>
-                                                                {
-                                                                    headerMap[col].type === 'chip' ?
-                                                                        <Chip label={value[col]} /> :
-                                                                        value[col]
-                                                                }
-                                                            </>
-                                                        }
-                                                    </TableCell>)
-                                                }
-                                            </TableRow>
-                                        ))
-                                    }
-                                </TableBody>
-                            </Table>
-                            <TablePagination
-                                component="div"
-                                count={tableRows.length}
-                                rowsPerPage={ROW_PER_PAGE}
-                                page={page}
-                                rowsPerPageOptions={[]}
-                                onChangePage={handleChangePage}
-                            />
-                        </TableContainer>
-                    </>
+                                    </TableBody>
+                                </Table>
+                                <TablePagination
+                                    component="div"
+                                    count={tableRows.length}
+                                    rowsPerPage={ROW_PER_PAGE}
+                                    page={page}
+                                    rowsPerPageOptions={[]}
+                                    onChangePage={handleChangePage}
+                                />
+                            </TableContainer>
+                    }
+                </>
             }
         </div>
     )
