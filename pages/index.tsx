@@ -2,6 +2,7 @@ import { AppBar, Button, CssBaseline, makeStyles, Switch, ThemeProvider, Toolbar
 import Head from 'next/head'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import io from 'socket.io-client'
+import ConnectingCard from '../components/connecting-card'
 import VaccineCentreTable from '../components/vaccine-centre-table'
 import { IVaccineCentre } from '../model/vaccine-centre.interface'
 import { lightTheme } from '../src/theme/theme'
@@ -39,6 +40,7 @@ export default function Home(props: HomeProps) {
   const styles = useStyles();
 
   const [centreList, setCentreList] = useState<IVaccineCentre[]>([]);
+  const [connected, setConnected] = useState(false);
 
   const [availableCentreList, setAvailableCentreList] = useState<IVaccineCentre[]>([]);
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -52,8 +54,14 @@ export default function Home(props: HomeProps) {
       setCentreList(data);
       setUpdateAvailable(true);
     })
-    socketRef.on('CONNECTED', (data) => {
-      console.log('Connected', data);
+    socketRef.on('connect', () => {
+      console.log('Connected...')
+      setConnected(true);
+    })
+
+    socketRef.on('disconnect', () => {
+      console.log('Disconnected from server');
+      setConnected(false);
     })
   }
 
@@ -71,7 +79,6 @@ export default function Home(props: HomeProps) {
   }, [centreList, updateAvailable, autoRefresh])
 
   useEffect(() => {
-    // socketRef.connect();
     listenSocketEvent();
     removeSSRMaterial();
     return () => {
@@ -103,7 +110,12 @@ export default function Home(props: HomeProps) {
         </AppBar>
         <main className="basic-vertical">
           <div className={`basic-vertical ${styles.container}`}>
-            <VaccineCentreTable centreList={availableCentreList}></VaccineCentreTable>
+            {
+              connected ?
+                <VaccineCentreTable centreList={availableCentreList}></VaccineCentreTable>
+                :
+                <ConnectingCard />
+            }
           </div>
         </main>
       </ThemeProvider>
